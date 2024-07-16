@@ -1,0 +1,97 @@
+{
+  "name": "smart-project-optimizer",
+  "displayName": "Smart Project Optimizer",
+  "description": "A VS Code extension to optimize project files using AI with customizable rules and settings.",
+  "version": "0.1.0",
+  "publisher": "yourpublishername",
+  "engines": {
+    "vscode": "^1.50.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/main.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Smart Project Optimizer Settings",
+      "properties": {
+        "aiPlugin.apiEndpoint": {
+          "type": "string",
+          "default": "https://your-ai-api-endpoint",
+          "description": "The API endpoint for the AI service."
+        },
+        "aiPlugin.apiToken": {
+          "type": "string",
+          "default": "",
+          "description": "The API token for authentication with the AI service."
+        },
+        "aiPlugin.fileTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "js",
+            "ts",
+            "jsx",
+            "tsx",
+            "json",
+            "md"
+          ],
+          "description": "File types to be scanned by the plugin."
+        },
+        "aiPlugin.ignoreFolders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "node_modules",
+            "dist",
+            "build"
+          ],
+          "description": "Folders to be ignored by the scanner."
+        },
+        "aiPlugin.customRules.detectLargeFiles": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable the large file detection rule."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "extension.optimizeProject",
+        "title": "Optimize Project"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.optimizeProject",
+        "key": "ctrl+alt+o",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/node": "^12.11.7",
+    "@types/vscode": "^1.50.0",
+    "@vscode/test-electron": "^1.4.0",
+    "eslint": "^7.11.0",
+    "typescript": "^4.0.3"
+  },
+  "dependencies": {
+    "axios": "^1.7.2"
+  }
+}
